@@ -1,54 +1,82 @@
 #include <iostream>
-
 using namespace std;
+
+// void pushAtStart (Node** head_ref, int new_data);
+// void printList(Node *node);
 
 // Creating a node.
 class Node
 {
 public:
-    int value;
+    int data;
     Node *next; // pointer to the class.
+
+    // Node(int x){
+    //     data = x;
+    //     next = NULL;
+    // }
 };
 
-// struct node {
-//     int data;
-//     struct node *next;
 
-// };
+void printList(Node * node){
+    while (node != NULL)
+    {
+    cout << node->data << endl;
+
+    node = node->next;
+    }
+}
+
+
+void pushAtStart (Node** head_ref, int new_data){
+
+    // 1. Create a new node
+
+    Node* new_node = new Node();
+
+    // 2. Add data
+
+    new_node -> data = new_data;
+
+    // 3. Make the next of new node as the head
+
+    new_node -> next = (*head_ref);
+
+    // 4. Move head to point to the new node
+
+    (*head_ref) = new_node;
+    
+
+}
+
+
 
 int main()
 {
 
     // Intialization.
-    Node *head;
-    Node *one = NULL;
-    Node *two = NULL;
-    Node *three = NULL;
+    Node *head = NULL;
+    Node *second = NULL;
+    Node *third = NULL;
 
     // Allocate nodes in heap.
-    one = new Node();
-    two = new Node();
-    three = new Node();
+    head = new Node();
+    second = new Node();
+    third = new Node();
 
-    // Assign values.
-    one->value = 1;
-    two->value = 2;
-    three->value = 3;
+    // Assign values
+    head->data = 1;
+    second->data = 2;
+    third->data = 3;
 
     // Connect nodes.
 
-    one->next = two;
-    two->next = three;
-    three->next = NULL;
+    head->next = second;
+    second->next = third;
+    third->next = NULL;
 
     // Lets print the values now.
 
-    head = one;
-
-    while (head != NULL)
-    {
-        cout << head->value << endl;
-
-        head = head->next;
-    }
+   
 }
+
