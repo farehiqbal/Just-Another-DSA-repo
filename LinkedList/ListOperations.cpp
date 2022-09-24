@@ -110,4 +110,34 @@ class ListOperations{
 
     }
 
+    // Deleting from start means simply pointing the head to second node
+
+    void deleteFromStart(){
+
+        Node * head; // should not initialize head from start when using the method obviously.
+        
+
+        if (head == nullptr) {
+            cout << "No nodes in link list";
+
+        }
+        else {
+            // 4 steps.
+            Node * temp = head;
+
+            head = head -> next;
+
+            temp -> next = nullptr;
+
+            delete temp;
+
+        }
+
+
+    }
+
+    void deleteFromEnd(){
+
+    }
+
 };
