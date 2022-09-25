@@ -9,7 +9,12 @@ using namespace std;
 
 int main() {
   string food = "Pizza";
-  string *ptr = &food;
+  string *ptr;
+  string **ptr2;
+
+  ptr = &food;
+  ptr2 = &ptr;
+
 
   // Output the value of food
   cout << food << "\n";
@@ -28,5 +33,10 @@ int main() {
   
   // Output the new value of the food variable
   cout << food << "\n";
+
+  cout << **ptr2 << endl;
+
+  cout << ptr;
+
   return 0;
 }

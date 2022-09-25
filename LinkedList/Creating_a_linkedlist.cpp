@@ -147,24 +147,19 @@ void deleteSpecificNode(Node** head_ref, int position){
 
 // Deleting from start means simply pointing the head to second node
 
-void deleteFromStart(Node* head){
+void deleteFromStart(Node** head){
 
-    if (head ==  NULL) {
-        cout << "No nodes in the linkedlist";
+    Node* temp;
 
-    }
-    
-    // 4 steps.
-    else{
-        Node* temp = head;
-        
-        
-        head = head -> next;
+    // If linked list is empty
 
-        temp -> next = NULL;
+    if(head == NULL || *head == NULL) return;
 
-        delete temp;
-    }
+    temp = *head;
+
+    *head = (*head) -> next;
+
+    free(temp);
     
 
 }
@@ -273,11 +268,13 @@ int main()
 
     printList(head);
 
-    // deleteFromStart(head);
+    deleteFromStart(&head);
+
+    
+
+    // deleteSpecificNode(&head, 1);
 
     printList(head);
-
-    deleteSpecificNode(&head, 1);
 
 }
 
