@@ -18,3 +18,16 @@
 
 - No base condition? function calls keep happening, stack filled again and again, memory exceeds
   resulting in the STACK-OVERFLOW.
+
+### How to understand and approach a problem 
+
+- Identify if you can break down problem into smaller parts.
+
+- Find the recursive relation.
+
+- Draw the recursive tree (important).
+    - Check the flow of functions on stack
+    - Identify left and right tree calls.
+    - 
+- See how values are returned at each step.
+
