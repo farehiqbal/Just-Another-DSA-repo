@@ -10,11 +10,11 @@
 using namespace std;
 
 void fun(char *s){
-    cout << "Hi, yes me, fun2 was called. Surprised?";
+    cout << "Hi, i was called.";
 }
 
 void fun(int x){
-    cout << "Hi, fun1 was called";
+    cout << "Hi, i was called, surprised?";
 }
 
 int main(){
@@ -24,7 +24,7 @@ int main(){
     // Although it looks like that the first method will be called, afterall, passing in what seems to
     // be a pointer. 
 
-    // he trouble is that because NULL is 0, and 0 is an integer,
+    // The trouble is that because NULL is 0, and 0 is an integer,
     // the second version of func will be called instead.
 
     // Even the compiler gives you warning. 
