@@ -7,7 +7,7 @@
 - When a functions finishes executing, it is removed from stack, **and the flow of the program is
   restored to where that function was called.
 
-#### Whhat is recursion?
+### What is recursion?
 - Recursion is simply function calling itself. 
 - Takes space compleity O(n).
 
