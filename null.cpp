@@ -5,8 +5,6 @@
 
 // I haved created an overloaded method, one takes int as parameter and other as pointer.
 
-
-
 #include <iostream>
 
 using namespace std;
