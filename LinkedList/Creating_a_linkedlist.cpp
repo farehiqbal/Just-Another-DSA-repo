@@ -17,7 +17,53 @@ public:
     // }
 };
 
+// NOTE: I have used Node** (double pointer) instead of Node* because we cannot change the value of a
+// passed argument within the function. But in most cases we needed to change the value of *head-ref. 
+// Thats why we passed the address of head-ref pointer, so we can change what is at that address. 
+
+void reverse(Node** head_ref){
+
+    Node* prev = NULL;
+    Node* current = *head_ref;
+    Node* next;
+
+    while(current != NULL){
+        
+        next = current -> next;
+        current -> next = prev;
+
+        prev = current;
+        current = next;
+
+    }
+
+    *head_ref = prev;
+
+
+
+}
+
+void deleteCompleteList(Node** head_ref){
+
+    Node* current = *head_ref;
+    
+
+    while (current != NULL){
+
+        
+        free(current);
+        current = current -> next;
+
+    }
+
+    
+    *head_ref = NULL;
+
+
+}
+
 void printList(Node * node){
+
     while (node != NULL)
     {
     cout << node->data << "->";
@@ -26,6 +72,7 @@ void printList(Node * node){
     }
     cout << endl;
 }
+
 
 
 // Also called append
@@ -45,6 +92,8 @@ void insertAtEnd(Node** head_ref, int new_data){
 
     // 4. Locate the current last node
 
+
+    // in case there are no nodes in the current list
     if(*head_ref == NULL){
         *head_ref = new_node;
         return;
@@ -64,9 +113,11 @@ void insertAtEnd(Node** head_ref, int new_data){
 }
 
 
+
+
 void insertAfter(Node* prev_node, int new_data){
 
-    // 1. Check
+    // 1. Check if the given node is null
     if (prev_node == NULL){
         cout << "The given previous node cannot be null";
         return;
@@ -164,6 +215,33 @@ void deleteFromStart(Node** head){
 
 }
 
+void deleteFromEnd2(Node* head){
+
+    if (head == NULL){
+        cout << "No node to dlete";
+        return;
+    }
+
+    if (head -> next == NULL){
+        delete head;
+        head = nullptr;
+        return;
+    }
+
+    Node* temp = head;
+
+    while (temp -> next -> next != NULL){
+
+        temp = temp -> next;
+
+
+    }
+
+    free (temp -> next);
+    temp -> next = NULL;
+
+}
+
 void deleteFromEnd(Node *head){
 
     // Case 1 when there are no nodes in list
@@ -178,14 +256,21 @@ void deleteFromEnd(Node *head){
         head = nullptr;
 
     }
+    // case 3: 
 
+    // if there are two or more than two nodes than you need to the second last node to break the link,
+    // and assign the second last node as the last node i.e. make its next point to null.
+
+    // current pointer goes to the last node while the prev pointer points to the second last node
+    // and does the work.
     else {
         Node* curr = head, *prev = nullptr;
 
         while (curr -> next != nullptr)
         {
-            prev = curr;
-            curr = curr -> next;
+            prev = curr;            // shifts the prev pointer one step
+            // cout << curr->data << " ";
+            curr = curr -> next;    // curr goes to the next node.
 
         }
         
@@ -198,8 +283,7 @@ void deleteFromEnd(Node *head){
 
 
 
-
-void pushAtStart (Node** head_ref, int new_data){
+void insertAtStart (Node** head_ref, int new_data){
 
     // 1. Create a new node
 
@@ -216,10 +300,16 @@ void pushAtStart (Node** head_ref, int new_data){
     // 4. Move head to point to the new node
 
     (*head_ref) = new_node;
-    
+
+
 
 }
 
+void insertAfterSpecifc(Node* head, int nodeValue, int new_data){}
+void insertBeforeSpecific(){}
+void deleteAfterSpecific(){}
+void deleteBeforeSpecific(){}
+Node* getNode(Node*head, int value){}
 
 
 int main()
@@ -248,32 +338,44 @@ int main()
 
     // Lets print the values now.
     
-//    printList(head);
-
-//    cout << "Inserting 4th node now" << endl;
-
-//    insertAtEnd(&head , 4);
-
-//    cout << "After insertion" << endl;
-
-//    printList(head);
-
-//    cout << "Inseting at start now"<< endl;
-
-//    pushAtStart(&head, 0);
-
-//    printList(head);
-
-//    cout << SearchInList(&head, 4);
+    
+// string dialog = "1. Insert at end.\n
+//                 2. Insert at start.\n
+//                 3. Display.\n
+//                 4. Delete at Start.\n
+//                 5. Delete at End.\n
+//                 0. Exit.\n";
+// while(true)
+//     {
+//         cout << dialog;
+//         cin >> opt;
+//         switch (opt)
+//         {
+//         case 1:
+//             insert_end();
+//             break;
+//         case 2:
+//             insert_start();
+//             break;
+//         case 3:
+//             display();
+//             break;
+//         case 4:
+//             delete_start();
+//             break;
+//         case 5:
+//             delete_end();
+//             break;
+//         case 0:
+//             exit(3);
+//         }
+//     }
 
     printList(head);
-
-    deleteFromStart(&head);
-
-    
-
-    // deleteSpecificNode(&head, 1);
-
+    // deleteFromEnd(head);
+    // printList(head);
+    // insertAtEnd(&head, 4);
+    deleteFromEnd2(head);
     printList(head);
 
 }
