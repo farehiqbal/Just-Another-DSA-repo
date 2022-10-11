@@ -36,7 +36,7 @@ void printReverse(Node* head) {
                 temp2 = temp;
                 temp = temp->next;
             }
-            cout << temp->data << " ";
+            cout << temp->data << "->";
             last = temp2;
         }
         cout << head->data;
@@ -56,7 +56,7 @@ void printList(Node* head){
     }
 }   
 
-void Reverse(Node** head){
+Node* Reverse(Node** head){
 
     Node* prev = NULL;
     Node* curr = *head;
@@ -72,8 +72,10 @@ void Reverse(Node** head){
         curr = next;
         
     }
-
+     
+     
     *head = prev;
+    return *head;
     
 }
 
@@ -105,27 +107,39 @@ void removeDuplicatesV2(Node *head){
         head = head->next;
     }
 }
-Node* mergeSortedList(Node* head1, Node* head2){
 
-    Node* buffer = new Node();
-    buffer -> data = 0;
-    buffer -> next = NULL;
+Node* nthPositionReturner(Node* head, int n){
 
-    Node* temp = head1;
+    Node* fast = head;
+    Node* slow = head;
 
-    while(temp -> next != NULL){
-        temp = temp -> next;
+    if(head == nullptr){
+        return slow = nullptr;
 
     }
-    temp -> next = head2;
 
-    printList(head1);
+    for(int i = 0; i < n; i++){
+        fast = fast -> next;
 
-    
+    }
+
+    if (fast == nullptr){
+        return slow = nullptr;
+
+    }
+
+    while(fast -> next != nullptr){
 
 
-    return buffer -> next;
+        slow = slow -> next;
+        fast = fast -> next;
+    }
+
+    return slow;
 }
+
+
+
 
 void removeDuplicates(Node* head){
 
@@ -161,32 +175,6 @@ void removeDuplicates(Node* head){
 
 }
 
-// Node* removeAll(Node* head, int value){
-
-//     Node* prev;
-//     Node* curr = head;
-//     Node* temp = curr;
-
-//     while(curr != nullptr){
-
-//         if (curr -> data == value){
-//             if(prev != nullptr){
-//                 prev -> next = curr -> next;
-                
-//                 delete(temp);
-//                 curr = curr -> next;
-//             }
-//             else{
-//                 curr = curr -> next;
-//             }
-//         }
-//         else {
-//             prev = curr;
-//             curr = curr -> next;
-//         }
-//     }
-
-// }
 
 
 Node* removeNthFromEnd(Node* head, int n){
@@ -204,7 +192,7 @@ Node* removeNthFromEnd(Node* head, int n){
         fast = fast -> next;
         slow = slow -> next;
     }
-
+   
     Node* temp = slow -> next;
     slow -> next = slow -> next -> next;
 
@@ -272,33 +260,6 @@ void SplitEvenAndOdd(Node* head){
 
 
 
-// Node* swap(Node* head, int k1, int k2){
-//     Node* first = head;
-//     Node* second = head;
-//     for (int i = 0; i < k1; i++){
-//         first = first->next;
-//     }
-//     first->next = NULL;
-//     for (int i = 0; i < k2; i++){
-//         second = second->next;
-//     }
-//     Node* temp = first;
-//     first->next = second->next;
-//     second->next = temp->next;
-    
-//     temp = first;
-    
-//     while(first->next != NULL){
-//         temp = temp->next;
-//     }
-    
-//     temp->next = second;
-    
-//     return first;
-// }
-
-
-
 Node* Intersection(Node* head1, Node* head2){
 
     Node* buffer = new Node();
@@ -329,7 +290,16 @@ Node* Intersection(Node* head1, Node* head2){
     return buffer -> next;
 }
 
-
+void menu(){
+    cout 
+    << "1. Display list" << endl
+    << "2. Display in reverse" << endl
+    << "3. Reverse linked list" <<endl
+    << "4. Split even and odd from list" << endl
+    << "5. Find intersection of lists" << endl
+    << "6. Remove nth from end"<<endl;
+    
+}
 
 int main(){
 
@@ -372,17 +342,52 @@ int main(){
     second2 -> next = third2;
     third2 -> next = NULL;
     
-    // printList(Intersection(head, head2));
+    bool flag = true;
+    
+   do
+   {
+        menu();
+        cout <<endl;
 
-    // printList(nthValueFromEnd(head, 2));
-    // printList(swap(head, 1, 2));
+        cout << "Enter choice:"<< endl;
+        int choice;
+        cin >> choice;
+        if (choice == 0) flag = false;
 
-    // removeNthFromEnd(head, 2);
-    // printList(head)
-    // removeDuplicatesV2(head);
-    // printList(head);
-    mergeSortedList(head, head2);
-    // printList(head);
+        switch (choice)
+        {
+        case 1:
+            printList(head);
+            cout <<endl << "\n";
+            break;
+        case 2:
+            printReverse(head);
+            cout << endl << "\n";
+            break;
+        case 3:
+            printList(Reverse(&head));
+            cout << endl << "\n";
+            break;
+        case 4:
+            SplitEvenAndOdd(head);
+            cout << endl << "\n";
+            break;
+        case 5:
+            printList(Intersection(head, head2));
+            cout << endl << "\n";
+            break;
+        case 6:
+            cout << "Enter nth node from end: ";
+            int n;
+            cin >> n;
+            printList(removeNthFromEnd(head, n));
+            cout <<endl<< "\n";
+
+        default:
+            break;
+        }
+   } while (flag);
+   
    
 
 }
