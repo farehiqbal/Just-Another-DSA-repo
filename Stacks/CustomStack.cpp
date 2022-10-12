@@ -35,6 +35,9 @@ class CustomStack{
 
         return data;
     }
+    int peek(){
+        return arr[top];
+    }
 
 };
 
@@ -46,9 +49,10 @@ int main(){
     stack.push(2);
     stack.push(3);
 
-    cout << stack.pop();
-    
+
+    cout << stack.pop() << endl;
 
 
+    cout << stack.peek();
 
 }
