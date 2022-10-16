@@ -1,5 +1,6 @@
 #include <iostream>
 
+
 using namespace std;
 
 
@@ -8,6 +9,7 @@ public:
     int data;
     Node* next;
 };
+
 
 
 void printReverse(Node* head) {
@@ -79,6 +81,60 @@ Node* Reverse(Node** head){
     
 }
 
+
+Node* sortList(Node* head){
+
+    Node* curr = head;
+    Node* temp = head;
+
+    while(curr ->next != NULL){
+
+        temp = curr -> next;
+
+        while (temp != NULL)
+        {
+            if(temp -> data < curr -> data){
+                int swapper = temp -> data;
+                temp -> data = curr -> data;
+                curr -> data = swapper;
+            }
+
+            temp = temp ->next;
+        }
+
+    curr = curr -> next;
+        
+    }
+
+    return head;
+}
+
+
+Node* mergeTwoLists(Node** head1, Node** head2){
+
+
+    Node* tail = *head1;
+
+    while(tail != NULL){
+
+        if(tail->next == NULL && head2 != NULL){
+            tail ->next = *head2;
+            break;
+        }
+        
+
+        tail = tail-> next;
+    }
+
+    tail -> next = *head2;
+
+
+    return *head1;
+
+}
+
+
+
 void removeDuplicatesV2(Node *head){
 
     if(head == nullptr){
@@ -139,6 +195,39 @@ Node* nthPositionReturner(Node* head, int n){
 }
 
 
+Node* swapNodes(Node* head,int n){
+
+    Node* nthStart = head;
+    Node* nthEnd = nthPositionReturner(head, n);
+
+    for (int i = 0; i < n; i++)
+    {
+        nthStart = nthStart -> next;
+    }
+
+    Node* startFollower = head;
+    Node* endFollower = head;
+
+    while(startFollower -> next != nthStart){
+        startFollower = startFollower -> next;
+    }
+
+    while(endFollower -> next != nthEnd){
+        endFollower = endFollower -> next;
+    }
+
+    nthStart ->next = nthEnd -> next;
+    startFollower -> next = nthEnd;
+    nthEnd -> next = endFollower;
+    endFollower -> next = nthEnd;
+
+    return head;
+    
+}
+
+
+
+
 
 
 void removeDuplicates(Node* head){
@@ -171,7 +260,6 @@ void removeDuplicates(Node* head){
     }
 
     printList(head);
-    
 
 }
 
@@ -199,8 +287,6 @@ Node* removeNthFromEnd(Node* head, int n){
     delete temp;
 
     return head;
-
-    
 
 }
 
@@ -307,22 +393,29 @@ int main(){
     Node* second = NULL;
     Node* third = NULL;
     Node* fourth = NULL;
-
+    Node* fifth = NULL;
+    Node* sixth = NULL;
 
     head = new Node();
     second = new Node();
     third = new Node();
     fourth = new Node();
+    fifth = new Node();
+    sixth = new Node();
 
     head -> data = 1;
     second -> data = 2;
     third -> data = 2;
-    fourth -> data = 4;
+    fourth -> data = 6;
+    fifth -> data = 5;
+    sixth -> data = 6;
 
     head -> next = second;
     second -> next = third;
     third -> next = fourth;
-    fourth -> next = NULL;
+    fourth -> next = fifth;
+    fifth -> next = sixth;
+    sixth -> next = NULL;
 
 
     Node* head2 = NULL;
@@ -344,50 +437,50 @@ int main(){
     
     bool flag = true;
     
-   do
-   {
-        menu();
-        cout <<endl;
+//    do
+//    {
+//         menu();
+//         cout <<endl;
 
-        cout << "Enter choice:"<< endl;
-        int choice;
-        cin >> choice;
-        if (choice == 0) flag = false;
+//         cout << "Enter choice:"<< endl;
+//         int choice;
+//         cin >> choice;
+//         if (choice == 0) flag = false;
 
-        switch (choice)
-        {
-        case 1:
-            printList(head);
-            cout <<endl << "\n";
-            break;
-        case 2:
-            printReverse(head);
-            cout << endl << "\n";
-            break;
-        case 3:
-            printList(Reverse(&head));
-            cout << endl << "\n";
-            break;
-        case 4:
-            SplitEvenAndOdd(head);
-            cout << endl << "\n";
-            break;
-        case 5:
-            printList(Intersection(head, head2));
-            cout << endl << "\n";
-            break;
-        case 6:
-            cout << "Enter nth node from end: ";
-            int n;
-            cin >> n;
-            printList(removeNthFromEnd(head, n));
-            cout <<endl<< "\n";
+//         switch (choice)
+//         {
+//         case 1:
+//             printList(head);
+//             cout <<endl << "\n";
+//             break;
+//         case 2:
+//             printReverse(head);
+//             cout << endl << "\n";
+//             break;
+//         case 3:
+//             printList(Reverse(&head));
+//             cout << endl << "\n";
+//             break;
+//         case 4:
+//             SplitEvenAndOdd(head);
+//             cout << endl << "\n";
+//             break;
+//         case 5:
+//             printList(Intersection(head, head2));
+//             cout << endl << "\n";
+//             break;
+//         case 6:
+//             cout << "Enter nth node from end: ";
+//             int n;
+//             cin >> n;
+//             printList(swapNodes(head, n));
+//             cout <<endl<< "\n";
 
-        default:
-            break;
-        }
-   } while (flag);
+//         default:
+//             break;
+//         }
+//    } while (flag);
    
-   
-
+    printList(sortList(mergeTwoLists(&head, &head2)));
+    
 }
