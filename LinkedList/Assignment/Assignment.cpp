@@ -34,6 +34,7 @@ void printReverse(Node* head) {
         while(last != head) {
             temp = head;
             temp2 = NULL;
+
             while (temp != last){
                 temp2 = temp;
                 temp = temp->next;
@@ -326,6 +327,7 @@ void SplitEvenAndOdd(Node* head){
 
     while(head != NULL){
         if(head -> data & 1 == 1){
+            
             tempOdd -> next = head;
             tempOdd = tempOdd ->next;
             addedLast = 0;
@@ -336,12 +338,39 @@ void SplitEvenAndOdd(Node* head){
             addedLast = 1;
 
         }
+        cout << "Address of node & value ";
+        cout << &head << '\t'<< head ->data << endl;
+        
         head = head -> next;
+        cout << &head;
     }
     addedLast == 0 ? tempOdd -> next = NULL : tempEven -> next = NULL;
-    printList(bufferEven -> next);
-    cout << endl;
-    printList(bufferOdd -> next);
+    // printList(bufferEven -> next);
+
+    // while(bufferEven -> next != NULL){
+    //     cout << "Address of Evennode & value "<< endl;
+    //     cout << &bufferEven -> next << '\t'<< bufferEven -> next ->data;
+        
+    // }
+    
+    // cout << endl;
+    // printList(bufferOdd -> next);
+
+    // cout << &bufferEven -> next -> next;
+    // cout << &head->next;
+
+    cout << &bufferOdd -> next -> next;
+    // cout << &head->next; 
+
+
+
+    //  while(bufferOdd -> next != NULL){
+        
+        
+    //     cout << "Address of oddnode & value "<< endl;
+    //     cout << &bufferOdd -> next << '\t'<< bufferOdd -> next ->data;
+        
+    //  }
 }
 
 
@@ -437,50 +466,50 @@ int main(){
     
     bool flag = true;
     
-//    do
-//    {
-//         menu();
-//         cout <<endl;
+   do
+   {
+        menu();
+        cout <<endl;
 
-//         cout << "Enter choice:"<< endl;
-//         int choice;
-//         cin >> choice;
-//         if (choice == 0) flag = false;
+        cout << "Enter choice:"<< endl;
+        int choice;
+        cin >> choice;
+        if (choice == 0) flag = false;
 
-//         switch (choice)
-//         {
-//         case 1:
-//             printList(head);
-//             cout <<endl << "\n";
-//             break;
-//         case 2:
-//             printReverse(head);
-//             cout << endl << "\n";
-//             break;
-//         case 3:
-//             printList(Reverse(&head));
-//             cout << endl << "\n";
-//             break;
-//         case 4:
-//             SplitEvenAndOdd(head);
-//             cout << endl << "\n";
-//             break;
-//         case 5:
-//             printList(Intersection(head, head2));
-//             cout << endl << "\n";
-//             break;
-//         case 6:
-//             cout << "Enter nth node from end: ";
-//             int n;
-//             cin >> n;
-//             printList(swapNodes(head, n));
-//             cout <<endl<< "\n";
+        switch (choice)
+        {
+        case 1:
+            printList(head);
+            cout <<endl << "\n";
+            break;
+        case 2:
+            printReverse(head);
+            cout << endl << "\n";
+            break;
+        case 3:
+            printList(Reverse(&head));
+            cout << endl << "\n";
+            break;
+        case 4:
+            SplitEvenAndOdd(head);
+            cout << endl << "\n";
+            break;
+        case 5:
+            printList(Intersection(head, head2));
+            cout << endl << "\n";
+            break;
+        case 6:
+            cout << "Enter nth node from end: ";
+            int n;
+            cin >> n;
+            printList(swapNodes(head, n));
+            cout <<endl<< "\n";
 
-//         default:
-//             break;
-//         }
-//    } while (flag);
+        default:
+            break;
+        }
+   } while (flag);
    
-    printList(sortList(mergeTwoLists(&head, &head2)));
+    // printList(sortList(mergeTwoLists(&head, &head2)));
     
 }
