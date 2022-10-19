@@ -8,6 +8,19 @@ class Node {
 public:
     int data;
     Node* next;
+
+     Node()
+    {
+        data = 0;
+        next = NULL;
+    }
+  
+    // Parameterised Constructor
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
 };
 
 
@@ -80,6 +93,39 @@ Node* Reverse(Node** head){
     *head = prev;
     return *head;
     
+}
+Node* commonValues(Node* list1, Node* list2){
+
+    Node* buffer = new Node();
+
+    Node* head = buffer;
+
+    while(list1 != NULL && list2 != NULL){
+
+        if(list1 -> data == list2 -> data){
+            
+            head -> next = new Node(list1 -> data);
+
+            head = head->next;
+            list1 = list1 -> next;
+            list2 = list2 -> next;
+
+            
+        }
+
+        else if(list1 -> data > list2 -> data){
+            list2 = list2 -> next;
+
+        }
+
+        else{
+            list1 = list1 -> next;
+        }
+
+        
+    }
+
+    return buffer -> next;
 }
 
 
@@ -434,8 +480,8 @@ int main(){
 
     head -> data = 1;
     second -> data = 2;
-    third -> data = 2;
-    fourth -> data = 6;
+    third -> data = 3;
+    fourth -> data = 4;
     fifth -> data = 5;
     sixth -> data = 6;
 
@@ -464,52 +510,54 @@ int main(){
     second2 -> next = third2;
     third2 -> next = NULL;
     
-    bool flag = true;
+//     bool flag = true;
     
-   do
-   {
-        menu();
-        cout <<endl;
+//    do
+//    {
+//         menu();
+//         cout <<endl;
 
-        cout << "Enter choice:"<< endl;
-        int choice;
-        cin >> choice;
-        if (choice == 0) flag = false;
+//         cout << "Enter choice:"<< endl;
+//         int choice;
+//         cin >> choice;
+//         if (choice == 0) flag = false;
 
-        switch (choice)
-        {
-        case 1:
-            printList(head);
-            cout <<endl << "\n";
-            break;
-        case 2:
-            printReverse(head);
-            cout << endl << "\n";
-            break;
-        case 3:
-            printList(Reverse(&head));
-            cout << endl << "\n";
-            break;
-        case 4:
-            SplitEvenAndOdd(head);
-            cout << endl << "\n";
-            break;
-        case 5:
-            printList(Intersection(head, head2));
-            cout << endl << "\n";
-            break;
-        case 6:
-            cout << "Enter nth node from end: ";
-            int n;
-            cin >> n;
-            printList(swapNodes(head, n));
-            cout <<endl<< "\n";
+//         switch (choice)
+//         {
+//         case 1:
+//             printList(head);
+//             cout <<endl << "\n";
+//             break;
+//         case 2:
+//             printReverse(head);
+//             cout << endl << "\n";
+//             break;
+//         case 3:
+//             printList(Reverse(&head));
+//             cout << endl << "\n";
+//             break;
+//         case 4:
+//             SplitEvenAndOdd(head);
+//             cout << endl << "\n";
+//             break;
+//         case 5:
+//             printList(Intersection(head, head2));
+//             cout << endl << "\n";
+//             break;
+//         case 6:
+//             cout << "Enter nth node from end: ";
+//             int n;
+//             cin >> n;
+//             printList(swapNodes(head, n));
+//             cout <<endl<< "\n";
 
-        default:
-            break;
-        }
-   } while (flag);
+//         default:
+//             break;
+//         }
+//    } while (flag);
    
     // printList(sortList(mergeTwoLists(&head, &head2)));
+
+    printList(commonValues(head, head2));
     
 }
