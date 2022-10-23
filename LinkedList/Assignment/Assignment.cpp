@@ -128,6 +128,19 @@ Node* commonValues(Node* list1, Node* list2){
     return buffer -> next;
 }
 
+ Node* middleNode(Node* head){
+        
+        Node* fast = head;
+        Node* slow = head;
+        
+        while(fast){
+            fast = fast -> next -> next;
+            slow = slow->next;
+        }
+        
+        return slow;
+    }
+
 
 Node* sortList(Node* head){
 
@@ -558,6 +571,8 @@ int main(){
    
     // printList(sortList(mergeTwoLists(&head, &head2)));
 
-    printList(commonValues(head, head2));
-    
+    // printList(commonValues(head, head2));
+    Node* middle = middleNode(head);
+
+    cout << middle -> data;
 }
