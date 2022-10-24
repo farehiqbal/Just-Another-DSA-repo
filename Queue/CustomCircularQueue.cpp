@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class CustomQueue{
+class CustomCircularQueue{
 
     public:
         int size;
@@ -10,14 +10,14 @@ class CustomQueue{
         int front;
         int rear;
 
-    CustomQueue(){
+    CustomCircularQueue(){
         size = 100;
         p = new int[size];
         front = -1;
         rear = -1;
     }
 
-    CustomQueue(int x){
+    CustomCircularQueue(int x){
         size = x;
         p = new int[size];
         front = -1;
@@ -26,16 +26,13 @@ class CustomQueue{
     }
 
     bool isFull(){
-        if(rear == size - 1) return true;
-        return false;
+
+        return ((rear + 1) % size == front);
     }
 
     bool isEmpty(){
-        if(rear == -1){
-            return true;
-        }
-
-        return false;
+        
+        return (front == -1);
     }
     
     void Enqueue(int x){
@@ -44,13 +41,10 @@ class CustomQueue{
             cout << "Can't Enqueue, No space"<< endl;
 
         }
-        if(front == -1){
-            front++;
-            p[++rear] = x;
-        }
-        else{
-            rear++;
-            p[rear] = x;
+        else {
+            if(isEmpty()){
+                
+            }
         }
     }
 
@@ -62,12 +56,12 @@ class CustomQueue{
             cout << "Nothing to dequeue" << endl;
         }
 
-        // else if(front == rear){
+        else if(front == rear){
 
-        //     x = p[front];
+            x = p[front];
 
-        //    front = rear = -1;
-        // }
+           front = rear = -1;
+        }
 
         else{
             
@@ -96,7 +90,6 @@ class CustomQueue{
             cout << p[i] << "<--";
         }
         
-        cout << endl;
     }
 
     int peek(){
@@ -111,19 +104,3 @@ class CustomQueue{
     
 
 };
-
-int main(){
-
-    CustomQueue queue(10);
-    
-    queue.Enqueue(1);
-    // queue.Enqueue(2);
-    // queue.Enqueue(3);
-    // cout << queue.Dequeue()<<endl;
-    // cout << queue.Dequeue()<<endl;
-    // cout << queue.Dequeue();
-    queue.Enqueue(2);
-    // cout << queue.Dequeue();
-    queue.Display();
-    cout <<queue.peek();
-}
