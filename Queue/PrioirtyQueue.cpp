@@ -1,112 +1,95 @@
-// Priority Queue Implementation: Unordered array;
-#include <bits/stdc++.h>
 #include <iostream>
 
 using namespace std;
-
-class PriorityQueue{
-
-    class item{
-            public:
-            int value;
-            int priority;
-        };
-
+class Que{
     public:
-        int size;
-        item *p;
-        int front;
-        int rear;
+    int size;
+    int *p;
+    int front;
+    int rear;
 
-        
-    
-    PriorityQueue(){
+    Que(){
         size = 100;
-        p[size];
+        p = new int[size];
         front = -1;
         rear = -1;
     }
 
-    PriorityQueue(int x){
-        size = x;
-        p[size];
+    Que(int x){
+        int size = x;
+        p = new int[size];
         front = -1;
         rear = -1;
     }
 
-    bool isFull(){
+    void Enqueue(int x){
+        if(isFull()){
+            cout<<"No space"<<endl;
+        }
+        else{
+            if(isEmpty()){       
+                front = rear = 0;
+                p[rear] = x;
+            }
+            else{
+                int j = rear;
+                while(p[j] <= x && j >= 0){
+                    p[j+1] = p[j];
+                    j--;
+                }
+                j++;
+                p[j] = x;
+                rear++;
+            }
+        }
+    }
 
-        return (front == size - 1);
+    void display(){
+        if(isEmpty()){
+            cout<<"Already empty!"<<endl;
+        }
+        else{
+            for (int i = 0; i <= rear; i++){
+                cout<<p[i]<<endl;
+            }
+        }
+    }
+
+    int Dequeue(){
+        if(isEmpty()){
+            cout<<"Already Empty!"<<endl;
+        }
+        else{
+            int x = p[front];
+            if(front == rear){
+                front = rear = -1;
+            }
+            else{
+                for (int i = 0,j = 1; i <= rear; i++,j++)
+                {
+                    p[i] = p[j];
+                }
+                rear--;               
+            }
+            return x;
+        }
     }
 
     bool isEmpty(){
-
-        return (rear == -1);
-    }
-
-    void Enqueue(int value, int priority){
-
-        rear++;
-
-        p[rear].value = value;
-        p[rear].priority = priority;
-    }
-
-    int peek(){
-
-        int highestPriority = INT_MIN;
-        int ind = -1;
-
-        // Finding element with highest priority
-        
-        for (int i = 0; i < size; i++)
-        {
-            // If priority is same choose element with higheer value
-
-            if(highestPriority == p[i].priority && ind > -1 && p[ind].value < p[i].value){
-
-                highestPriority = p[i].priority;
-                ind = i;
-
-            }
-
-            else if (highestPriority < p[i].priority){
-                highestPriority = p[i].priority;
-                ind = i;
-
-            }
+        if(rear == -1){
+            return true;
         }
-        
-        return ind;
+        else{
+            return false;
+        }
     }
 
-    void Dequeue(){
-
-        int ind = peek();
-
-        // left shift
-        for (int i = 0; i < size; i++)
-        {
-            p[i] = p[i+1];
+    bool isFull(){
+        if(rear == size-1){
+            return true;
         }
-
-        rear--;
-
-        
+        else{
+            return false;
+        }
     }
 };
-
-
-int main(){
-
-    PriorityQueue pq(10);
-    pq.Enqueue(100,1);
-    pq.Enqueue(10,1);
-    // cout << pq.isEmpty();
-
-    cout << pq.peek();
-
-
-
-}
-

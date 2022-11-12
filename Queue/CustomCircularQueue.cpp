@@ -39,13 +39,20 @@ class CustomCircularQueue{
 
         if(isFull()){
             cout << "Can't Enqueue, No space"<< endl;
-
+            return;
         }
         else {
             if(isEmpty()){
                 
+                front = rear = 0;
+            }
+
+            else{
+                rear = (rear + 1)% size;
             }
         }
+
+        p[rear] = x;
     }
 
     int Dequeue(){
@@ -53,50 +60,54 @@ class CustomCircularQueue{
         int x;
 
         if(isEmpty()){
-            cout << "Nothing to dequeue" << endl;
-        }
+            cout << "Empty queue.";
 
-        else if(front == rear){
-
-            x = p[front];
-
-           front = rear = -1;
+            return -1;
         }
 
         else{
-            
             x = p[front];
 
-            for (int i = 0; i < rear; i++)
-            {
-                p[i] = p[i+1];
+            if(front == rear){
+                front = rear = -1;
             }
 
-            rear--;
-            
+            else{
+                front = (front + 1) % size;
             }
+
+            
+        }
+
         return x;
     }
 
 
     void Display(){
         
-        if(front == rear){
+        if(isEmpty()){
             cout << "Empty queue";
         }
 
-        for (int i = 0; i <= rear; i++)
-        {
-            cout << p[i] << "<--";
+        // if(front == rear){
+        //     cout << p[front];
+        // }
+
+        else{
+            for (int i = front; i <= rear; i++)
+            {
+                cout << p[i] << "<--";
+            }
         }
-        
+        cout <<endl;
     }
 
     int peek(){
         
-        if(front == rear){
-            cout << "empty queue";
+        if(isEmpty()){
+            cout << "EMPTY QUEUE";
         }
+
 
         return p[front];
         
@@ -104,3 +115,23 @@ class CustomCircularQueue{
     
 
 };
+
+int main(){
+
+    CustomCircularQueue cq(5);
+
+    cq.Enqueue(1);
+    cq.Enqueue(2);
+    cq.Enqueue(3);
+    cq.Enqueue(4);
+    cq.Enqueue(5);
+    // cq.Display();
+    // cq.Dequeue();
+    // cq.Display();
+    // cout << cq.peek();
+    cq.Enqueue(6);
+    cq.Enqueue(7);
+    // cq.Display();
+    // cout << cq.p[4];
+    cq.Display();
+}

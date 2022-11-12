@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int DEFAULT_SIZE = 10;
+const int DEFAULT_SIZE = 50;
 
 class CustomStack{
     
@@ -27,7 +27,7 @@ class CustomStack{
 
         if(top == -1){
             cout << "Stack is empty";
-            return NULL;
+            return 0 ;
         }
 
         int data = arr[top--];
@@ -93,5 +93,5 @@ int EvaluatePostfix(string exp){
 
 int main(){
 
-    cout << EvaluatePostfix("6523+8*+3+*");
+    cout << EvaluatePostfix("7536*-+82/+9+");
 }

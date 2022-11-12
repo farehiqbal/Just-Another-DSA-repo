@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <stack>
 using namespace std;
 
 const int DEFAULT_SIZE = 10;
@@ -23,20 +23,20 @@ class CustomStack{
         arr[++top] = item;
     }
 
-    int pop(){
+    char pop(){
 
         if(top == -1){
             cout << "Stack is empty";
             return NULL;
         }
 
-        int data = arr[top--];
+        char data = arr[top--];
 
         return data;
     }
 
 
-    int peek(){
+    char peek(){
         return arr[top];
     }
 
@@ -59,13 +59,13 @@ class CustomStack{
 int priority(char x)
 {
     if(x == '('){
-        return 0;
-    }
-    if(x == '+' || x == '-'){
         return 1;
     }
-    if(x == '*' || x == '/'){
+    if(x == '+' || x == '-'){
         return 2;
+    }
+    if(x == '*' || x == '/'){
+        return 3;
     }
     
 }
@@ -86,10 +86,11 @@ void infixToPostfix(string exp){
 
         else if (exp[i] == ')'){
             while(stack.peek() != '('){
-                cout << stack.pop();
+                cout << stack.peek();
+                stack.pop();
             }
 
-            stack.pop();
+            stack.pop(); // pops the '('
         }
 
         else{
@@ -152,6 +153,23 @@ bool checkMultipleTyped(string s){
     else{
         return false;
     } 
+}
+
+
+bool isValid(string s) {
+    stack<char>st; 
+
+    for(auto it: s) {
+        if(it=='(' || it=='{' || it == '[') st.push(it); 
+        else {
+            if(st.size() == 0) return false; 
+            char ch = st.top(); 
+            st.pop(); 
+            if((it == ')' and ch == '(') or  (it == ']' and ch == '[') or (it == '}' and ch == '{')) continue;
+            else return false;
+        }
+    }
+    return st.empty(); 
 }
 
 
@@ -313,14 +331,14 @@ int main(){
 
 //    cout << isPalindromeV2("civic");
 
-   cout << checkSingleTypedBraces("())");
+//    cout << checkSingleTypedBraces("())");
 
     // cout << checkMutliTypedBraces("[{()}]");
     // cout << checkMultipleTyped("[{()}]");
 
-    // infixToPostfix("7+(5-3*6)+8/2+9");
+    infixToPostfix("7+(5-3*6)+8/2+9");
 
 
-    cout << isPalindromeV2("mango");
-
+    // cout << isPalindromeV2("mango");
+    // cout << isValid("{[()]}");
 }
