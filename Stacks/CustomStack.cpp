@@ -30,9 +30,9 @@ class CustomStack{
             return NULL;
         }
 
-        char data = arr[top--];
+        return arr[top--];
 
-        return data;
+        
     }
 
 

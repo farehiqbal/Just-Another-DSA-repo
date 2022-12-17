@@ -23,7 +23,7 @@ class Node{
         node -> left = NULL;
         node -> right = NULL;
 
-    }
+    }                            
 
 };
 
@@ -73,7 +73,7 @@ Node* rotateRight(Node* y){
     x->height = 1 + max(getHeight(x-> left), getHeight(x -> right));
     y->height = 1 + max(getHeight(y-> left), getHeight(y -> right));
 
-    return y;
+    return x;
 }
 
 Node* rotateLeft(Node* x){
@@ -86,7 +86,7 @@ Node* rotateLeft(Node* x){
     x->height = 1 + max(getHeight(x-> left), getHeight(x -> right));
     y->height = 1 + max(getHeight(y-> left), getHeight(y -> right));
 
-    return x;
+    return y;
 }
 
 
@@ -103,7 +103,7 @@ Node* insert(Node* root, int key){
     }
     else return root; // no duplicates are allowed.
 
-    // now we need to update to update the height of the ansector node i.e. the root node.
+    // now we need to update to update the height of each node.
 
     root -> height = 1 + max (getHeight(root -> left), getHeight(root ->right));
 
@@ -126,6 +126,83 @@ Node* insert(Node* root, int key){
     return root;
 
 }
+
+Node* FindMin(Node* root){
+
+	while(root->left != NULL) root = root->left;
+	return root;
+}
+
+
+Node* deleteNode(Node* root, int data){
+
+    if(!root) return root;
+    
+    else if(data < root -> key) root ->left = deleteNode(root ->left, data);
+
+    else if (data > root -> key) root -> right = deleteNode(root -> right, data);
+    // node is found till here
+    else{
+        // case 1: Leaf node
+        if(root ->left == NULL && root -> right == NULL){
+            delete root;
+            root = NULL;
+            
+        }
+        // Case 2: node with one child
+        else if(root -> left == NULL){
+            Node* temp = root;
+            root = root -> right;
+            delete temp;
+            
+        }
+        else if(root -> right == NULL){
+            Node* temp = root;
+            root = root -> left;
+            delete temp;
+            
+        }
+
+        // case 3: Node with two child
+        else{
+            Node* temp = FindMin(root -> right);
+            root -> key = temp ->key;
+            root -> right = deleteNode(root ->right, temp -> key);
+        }
+    }
+
+    if (!root) return root;
+
+    // update the height of each node
+    root -> height = 1 + max (getHeight(root -> left), getHeight(root ->right));
+
+    int bf = getBalanceFactor(root);
+
+    if(bf > 1){
+        if(getBalanceFactor(root ->left ) >= 0){
+            return rotateRight(root);
+        }
+        else{
+            root ->left = rotateLeft(root ->left);
+            return rotateRight(root);
+        }
+    }
+
+
+     if (bf < -1) {
+        if (getBalanceFactor(root->right) <= 0) {
+        return rotateLeft(root);
+    } else {
+        root->right = rotateRight(root->right);
+        return rotateLeft(root);
+    }
+  }
+
+
+    return root;
+
+}
+
 
 void printTree(Node *root, string indent, bool last) {
     if (root != nullptr) {
@@ -166,5 +243,7 @@ int main(){
     root = insert(root,4);
 
     printTree(root, "", true);
-
+    // preOrder(root);
+    deleteNode(root, 3);
+    printTree(root, "", true);
 }

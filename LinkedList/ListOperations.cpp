@@ -96,17 +96,17 @@ class ListOperations{
     }
 
 
-    bool SearchInList(Node** head_ref, int key){
+    Node* SearchInList(Node** head_ref, int key){
 
         Node* curr = *head_ref;
 
         while (curr != NULL) {
-            if (curr -> data == key) return true;
+            if (curr -> data == key) return curr;
                 curr = curr -> next;
 
         }
 
-        return false;
+        return nullptr;
 
     }
 

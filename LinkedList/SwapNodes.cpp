@@ -81,23 +81,24 @@ Node* swapTwoNodes(Node* head, int n, int m){
 
     // currM is node from end
     Node* currM = mthNodeReturner(head, m);
-    Node* prevM = head;
-
-    while(prevM -> next != currM){
-        prevM = prevM -> next;
+    Node* prevM = nullptr;
+    Node* temp = head;
+    while(temp != currM){
+        prevM = temp;
+        temp = temp -> next;
     }
     
     // Case1 : if either of them does not exist
     if(!currM || !currN) {
-        cout << "NullPointerException" << endl;
-        return head;
+        cout << endl <<"NullPointerException" << endl;
+        throw 0;
 
     }
 
     // Case2: nth and mth nodes are same
     if(currN == currM){
-        cout << "SwapException" << endl;
-        return head;
+        cout << endl<< "SwapException" << endl;
+        throw 0;
     }
 
 
@@ -124,7 +125,7 @@ Node* swapTwoNodes(Node* head, int n, int m){
 
     // now swap
 
-    Node* temp = currN ->next;
+    temp = currN ->next;
     currN->next = currM -> next;
     currM ->next = temp;
 
@@ -167,6 +168,6 @@ int main(){
 
     
     // swapTwoNodes(head, 2, 2);
-    printList(swapTwoNodes(head, 2, 1));
+    printList(swapTwoNodes(head, 7, 7));
 
 }

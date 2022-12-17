@@ -101,8 +101,6 @@ void insertAtEnd(Node** head_ref, int new_data){
 
     while ( last -> next != NULL){
         last = last -> next;
-
-
     }
     
     // 5. Change the last node to the newly added node.
@@ -186,11 +184,11 @@ void deleteSpecificNode(Node** head_ref, int position){
         return;
     }
 
-    Node* next = temp -> next -> next;
+    Node* temp2 = temp -> next -> next;
 
     free(temp -> next);
 
-    temp ->next = next;
+    temp ->next = temp2;
 
 }
 
@@ -374,12 +372,13 @@ int main()
 //         }
 //     }
 
-    printList(head);
-    // deleteFromEnd(head);
     // printList(head);
-    // insertAtEnd(&head, 4);
-    deleteFromEnd2(head);
+    // // deleteFromEnd(head);
+    // // printList(head);
+    // // insertAtEnd(&head, 4);
+    // deleteFromEnd2(head);
+    // printList(head);
     printList(head);
-
+    reverse(&head);
+    printList(head);
 }
-
