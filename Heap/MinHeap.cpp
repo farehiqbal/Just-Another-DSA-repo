@@ -36,6 +36,7 @@ class MinHeap{
     }
 
     void printHeap(){
+        
         for (int i = 0; i < size; i++){
             cout << heap[i] << " ";
         }
@@ -189,7 +190,7 @@ int main(){
     heap.printHeap();
     // cout << heap.LinearSearch(2);
 
-    cout << heap.removeMin();
-    cout << heap.removeMin();
+    // cout << heap.removeMin();
+    // cout << heap.removeMin();
     // heap.heapSort();
 }
