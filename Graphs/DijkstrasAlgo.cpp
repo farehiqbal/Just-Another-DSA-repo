@@ -73,44 +73,6 @@ void Dijkstras(int adjMatrix[Nodes][Nodes], int sourceNode){
 
 }
 
- void bfs(int adjMatrix[Nodes][Nodes], int sourceNode){
-
-        queue<int> queue;
-        bool visited[Nodes];
-
-        for (int i = 0; i < Nodes; i++)
-        {
-            visited[i] = false;
-        }
-        
-
-
-        queue.push(sourceNode);
-        visited[sourceNode] = true;
-
-        int output;
-
-        while(!queue.empty()){
-
-            output = queue.front();
-            queue.pop();
-            cout << output;
-
-            // queue.pop();
-
-            for (int i = 0; i < Nodes; i++)
-            {
-                if(adjMatrix[output][i] != 0 && visited[i] == false){
-                    // cout << i;
-                    
-                    visited[i] = true;
-                    queue.push(i);
-                }
-            }
-            
-        }
-        
-    }
 
 
 
@@ -144,8 +106,8 @@ int main(){
                                     { 0, 0, 0, 2, 3, 0}};
  
 
-    // Dijkstras(adjMatrix, 0);
-    bfs(adjMatrix, 0);
+    Dijkstras(adjMatrix, 0);
+    // bfs(adjMatrix, 0);
 
     
     

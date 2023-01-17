@@ -75,11 +75,10 @@ void dfs(int adjMatrix[Nodes][Nodes], int sourceNode){
     
 }
 
-void dfsRecursive(int adjMatrix[Nodes][Nodes], int sourceNode){
+void dfsRecursive(int adjMatrix[Nodes][Nodes], int sourceNode, bool visited[Nodes]){
 
     cout << sourceNode <<" ";
-
-    bool visited[Nodes];
+    // bool visited[Nodes];
 
     // for (int i = 0; i < Nodes; i++)
     // {
@@ -91,7 +90,7 @@ void dfsRecursive(int adjMatrix[Nodes][Nodes], int sourceNode){
     for (int i = 0; i < Nodes; i++)
     {
         if(adjMatrix[sourceNode][i] != 0 && visited[i] == false){
-            dfsRecursive(adjMatrix, i);
+            dfsRecursive(adjMatrix, i, visited);
         }
     }
     
@@ -111,10 +110,13 @@ int main(){
  
 
     // Dijkstras(adjMatrix, 0);
-    bfs(adjMatrix, 0);
-    cout << endl;
+    // bfs(adjMatrix, 0);
+    // cout << endl;
     dfs(adjMatrix, 0);
     cout << endl;
-    dfsRecursive(adjMatrix, 0);
+
+    bool distance[] = {false, false, false, false, false, false};
+
+    dfsRecursive(adjMatrix, 0, distance);
     
 }
